@@ -42,8 +42,10 @@ public class BaseModificationCoverageRenderer {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                if (key.modification.startsWith("NONE_") && colorOption != ColorOption.BASE_MODIFICATION_2COLOR)
+                if (key.modification.startsWith("NONE_") && ( colorOption != ColorOption.BASE_MODIFICATION_2COLOR
+                        && colorOption != ColorOption.BASE_MODIFICATION_4COLOR) ) {
                     continue;
+                }
 
                 byte base = (byte) key.getBase();
                 final byte compl = SequenceUtil.complement(base);
@@ -54,17 +56,26 @@ public class BaseModificationCoverageRenderer {
 
                 if (detectable == 0) continue;  //No informative reads
 
-                int count = modificationCounts.getCount(pos, key, threshold, colorOption == ColorOption.BASE_MODIFICATION_2COLOR);
+                int count = modificationCounts.getCount(pos, key, threshold, ( colorOption == ColorOption.BASE_MODIFICATION_2COLOR
+                        || colorOption == ColorOption.BASE_MODIFICATION_4COLOR ));
                 if (count == 0) continue;
 
                 float modFraction = (((float) modifiable) / total) * (((float) count) / detectable);
                 int modHeight = Math.round(modFraction * barHeight);
 
-                int likelihoodSum = modificationCounts.getLikelihoodSum(pos, key, threshold, colorOption == ColorOption.BASE_MODIFICATION_2COLOR);
+                int likelihoodSum = modificationCounts.getLikelihoodSum(pos, key, threshold, ( colorOption == ColorOption.BASE_MODIFICATION_2COLOR
+                        || colorOption == ColorOption.BASE_MODIFICATION_4COLOR ));
                 int averageLikelihood = (int) ((double) likelihoodSum) / count;
 
                 int baseY = pBottom - modHeight;
-                Color modColor = BaseModificationColors.getModColor(key.modification, averageLikelihood, colorOption);
+
+                String modification = key.modification;
+                if (colorOption == ColorOption.BASE_MODIFICATION_4COLOR){
+                    if (key.getStrand() == '-') {
+                        modification = modification + "_Reverse";
+                    }
+                }
+                Color modColor = BaseModificationColors.getModColor(modification, averageLikelihood, colorOption);
                 Graphics2D graphics = context.getGraphics();
                 graphics.setColor(modColor);
                 graphics.fillRect(pX, baseY, dX, modHeight);

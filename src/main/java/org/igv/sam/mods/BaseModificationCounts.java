@@ -178,7 +178,8 @@ public class BaseModificationCounts {
         buffer.append("<br>---------<br>");
         buffer.append("Modifications with likelihood > " + (lastThreshold * 100) + "%");
 
-        final boolean includeNomods = colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_2COLOR;
+        final boolean includeNomods = colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_2COLOR
+                || colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR;
 
         Map<BaseModificationKey, Map<Integer, ByteArrayList>> l = includeNomods ? nomodLikelihoods : maxLikelihoods;
         for (BaseModificationKey key : l.keySet()) {

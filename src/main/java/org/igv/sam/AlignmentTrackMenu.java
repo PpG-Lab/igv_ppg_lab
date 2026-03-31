@@ -853,6 +853,23 @@ class AlignmentTrackMenu extends IGVPopupMenu {
                 colorMenu.add(bmMenuItem);
                 group.add(bmMenuItem);
             }
+
+            colorMenu.addSeparator();
+            if (modificationCount > 1) {
+                bmMenuItem = getBasemodColorMenuItem("base modification 4-color (all)", AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR, groupByStrand, null);
+                bmMenuItem.setSelected(renderOptions.getColorOption() == AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR && filter == null);
+                colorMenu.add(bmMenuItem);
+                group.add(bmMenuItem);
+            }
+            for (String m : allModifications) {
+                String name = BaseModificationUtils.modificationName(m);
+                bmMenuItem = getBasemodColorMenuItem("base modification 4-color (" + name + ")", AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR, groupByStrand, m);
+                bmMenuItem.setSelected(renderOptions.getColorOption() ==
+                        AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR &&
+                        (filter != null && filter.pass(m)));
+                colorMenu.add(bmMenuItem);
+                group.add(bmMenuItem);
+            }
         }
 
 

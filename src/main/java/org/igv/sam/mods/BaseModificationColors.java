@@ -54,6 +54,11 @@ public class BaseModificationColors {
         colors.put("NONE_T", preferences.getAsColor(BASEMOD_NONE_T_COLOR));
         colors.put("NONE_G", preferences.getAsColor(BASEMOD_NONE_G_COLOR));
         colors.put("NONE_N", preferences.getAsColor(BASEMOD_NONE_N_COLOR));
+
+        // Reverse strand colors for the 'base modification 4-color (...)' option
+        colors.put("m_Reverse", preferences.getAsColor(BASEMOD_M_COLOR_RS));
+        colors.put("NONE_C_Reverse", preferences.getAsColor(BASEMOD_NONE_C_COLOR_RS));
+
         modColorMap.clear();
     }
 
@@ -72,7 +77,8 @@ public class BaseModificationColors {
 
         String key = modification + l + colorOption;
         if (!modColorMap.containsKey(key)) {
-            int alpha = colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_2COLOR ?
+            int alpha = ( colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_2COLOR
+                    || colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR) ?
                     Math.max(20, Math.min(255, 20 + (int) (l * l / 50f - 4 * l + 200))) :
                     Math.max(20, (int) Math.min(255, 6.127e-3*l*l));
 

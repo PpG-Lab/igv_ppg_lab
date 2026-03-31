@@ -71,6 +71,9 @@ public class BaseModificationRenderer {
                     noModLh -= lh;
                     if ((filter == null || filter.pass(bmSet.getModification(), canonicalBase)) && (modification == null || lh > maxLh)) {
                         modification = bmSet.getModification();
+                        if (colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR && bmSet.getStrand() == '-'){
+                            modification += "_Reverse";
+                        }
                         canonicalBase = bmSet.getCanonicalBase();
                         maxLh = lh;
                         modStrand = bmSet.getStrand();
@@ -82,7 +85,8 @@ public class BaseModificationRenderer {
 
                 Color c = null;
                 final float scaledThreshold = threshold * 255;
-                if (noModLh > maxLh && colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_2COLOR && noModLh >= scaledThreshold) {
+                if (noModLh > maxLh && ( colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_2COLOR
+                        || colorOption == AlignmentTrack.ColorOption.BASE_MODIFICATION_4COLOR ) && noModLh >= scaledThreshold) {
                     c = BaseModificationColors.getModColor("NONE_" + canonicalBase, noModLh, colorOption);
                 } else if (maxLh >= scaledThreshold) {
                     c = BaseModificationColors.getModColor(modification, maxLh, colorOption);

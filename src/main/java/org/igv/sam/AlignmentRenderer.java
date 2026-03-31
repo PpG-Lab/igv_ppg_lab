@@ -1177,6 +1177,7 @@ public class AlignmentRenderer {
             case BISULFITE:
             case BASE_MODIFICATION:
             case BASE_MODIFICATION_2COLOR:
+            case BASE_MODIFICATION_4COLOR:
             case SMRT_SUBREAD_IPD:
             case SMRT_SUBREAD_PW:
             case SMRT_CCS_FWD_IPD:

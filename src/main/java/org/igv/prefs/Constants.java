@@ -227,6 +227,9 @@ final public class Constants {
     public static final String BASEMOD_NONE_G_COLOR = "BASEMOD.NONE_G_COLOR";
     public static final String BASEMOD_NONE_N_COLOR = "BASEMOD.NONE_N_COLOR";
 
+    public static final String BASEMOD_M_COLOR_RS = "BASEMOD.M_COLOR_RS";
+    public static final String BASEMOD_NONE_C_COLOR_RS = "BASEMOD.NONE_C_COLOR_RS";
+
     public static final String BASEMOD_GROUP_BY_STRAND = "BASEMOD.GROUP_BY_STRAND";
     public static final String BASEMOD_DISTINGUISH_STRANDS = "BASEMOD.DISTINGUISH_STRANDS";
     public static final String BASEMOD_SKIPPED_BASES = "BASEMOD.SKIPPED_BASES";
@@ -390,7 +393,10 @@ final public class Constants {
             BASEMOD_NONE_C_COLOR,
             BASEMOD_NONE_T_COLOR,
             BASEMOD_NONE_G_COLOR,
-            BASEMOD_NONE_N_COLOR
+            BASEMOD_NONE_N_COLOR,
+            BASEMOD_M_COLOR_RS,
+            BASEMOD_NONE_C_COLOR_RS
+
     );
 
     static java.util.List<String> NUCLEOTIDE_COLOR_KEYS = Arrays.asList(
