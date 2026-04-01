@@ -75,6 +75,7 @@ public class AlignmentTrack extends AbstractTrack implements IGVEventObserver {
         SPLIT,
         BASE_MODIFICATION,
         BASE_MODIFICATION_2COLOR,
+        BASE_MODIFICATION_4COLOR,
         SMRT_SUBREAD_IPD,
         SMRT_SUBREAD_PW,
         SMRT_CCS_FWD_IPD,
@@ -83,7 +84,7 @@ public class AlignmentTrack extends AbstractTrack implements IGVEventObserver {
         SMRT_CCS_REV_PW;
 
         public boolean isBaseMod() {
-            return this == BASE_MODIFICATION || this == BASE_MODIFICATION_2COLOR;
+            return this == BASE_MODIFICATION || this == BASE_MODIFICATION_2COLOR || this == BASE_MODIFICATION_4COLOR;
         }
 
         public boolean isSMRTKinetics() {
